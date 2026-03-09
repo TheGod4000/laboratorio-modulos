@@ -1,19 +1,23 @@
 # Laboratorio de Módulos JavaScript: CommonJS vs ES6
 
 ## Datos del Estudiante
-- **Nombre:** [Tu Nombre]
+- **Nombre:** Luis Alberto Godinez Martinez
 - **Asignatura:** Desarrollo de Aplicaciones Web
-- **Fecha:** [Fecha de entrega]
-- **Tiempo de desarrollo:** [Tus horas, ej. 2 horas]
+- **Fecha:** 12 Feb 2026
+- **Tiempo de desarrollo:** 2 horas
 
 ## 1. Comparativa CommonJS vs ES6
-| Característica | CommonJS | ES6 Modules |
+
+| Característica | CommonJS | ES6 Modules (ESM) |
 | :--- | :--- | :--- |
-| **Sintaxis importación** | `require('./mod')` | `import mod from './mod'` |
-| **Sintaxis exportación** | `module.exports` / `exports` | `export` / `export default` |
-| **Carga** | Síncrona | Asíncrona |
-| **Soporte Node.js** | Nativo | Requiere `"type": "module"` |
-| **Soporte Navegador** | Requiere bundler (Webpack) | Nativo (`<script type="module">`) |
+| **Sintaxis de importación** | `const mod = require('./mod.js')` | `import mod from './mod.js'` |
+| **Sintaxis de exportación** | `module.exports = { ... }` o `exports.fn = ...` | `export const fn = ...` o `export default ...` |
+| **Carga (síncrona/asíncrona)** | **Síncrona**. Bloquea la ejecución hasta cargar. | **Asíncrona**. Se puede cargar en paralelo (ideal para red). |
+| **Soporte en Node.js** | Nativo e histórico (por defecto en `.js`). | Nativo (requiere `"type": "module"` en `package.json` o `.mjs`). |
+| **Soporte en navegador** | **No soportado nativamente** (requiere bundlers). | **Soportado nativamente** usando `<script type="module">`. |
+| **Importación dinámica** | Se puede usar `require()` dentro de condicionales o funciones. | Usa la función `import()` que devuelve una **Promesa**. |
+| **Alcance del módulo (scope)** | Archivo local (Node.js lo envuelve internamente en una función). | Archivo local, pero impone **Modo Estricto (`"use strict"`)** por defecto y previene filtraciones globales. |
+| **Cacheo de módulos** | Se evalúa una vez y devuelve una **copia** estática del valor exportado. | Se evalúa una vez y devuelve una **referencia viva** (de solo lectura) al valor exportado. |
 
 ## 2. Análisis de Errores
 - **Error 1:** `const { sumar } = require('./calculadora.js');`
